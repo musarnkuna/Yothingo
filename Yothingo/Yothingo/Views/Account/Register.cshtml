@@ -1,0 +1,113 @@
+@model YothingoSprint1.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+    <h2>@ViewBag.Title.</h2>
+
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Create a new account.</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>First Name</h5>
+                @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "First Name" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>Last Name</h5>
+                @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Last Name" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>Company Name</h5>
+                @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Company Name" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>Email</h5>
+                @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Email " } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>Password</h5>
+                @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "form-control", @type = "Password", @placeholder = "Password" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>Confirm Password</h5>
+                @Html.EditorFor(m => m.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", @type = "Password", @placeholder = "Confirm Password" } })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>Address</h5>
+                @Html.EditorFor(m => m.Address, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Address" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>City</h5>
+                @Html.EditorFor(m => m.City, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "City" } })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>Province</h5>
+                @Html.EditorFor(m => m.Province, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Province" } })
+                @Html.ValidationMessageFor(model => model.Province, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>Postal Code</h5>
+                @Html.EditorFor(m => m.PostalCode, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Postal Code" } })
+                @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>Country</h5>
+                @Html.EditorFor(m => m.Country, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Country" } })
+                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>Phone</h5>
+                @Html.EditorFor(m => m.Phone, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Phone" } })
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-success" value="Register" />
+            </div>
+        </div>
+        <p>
+            @Html.ActionLink("I have an account", "Login")
+        </p>
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

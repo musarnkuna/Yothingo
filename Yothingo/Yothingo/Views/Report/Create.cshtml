@@ -1,0 +1,106 @@
+@model YothingoSprint1.Models.Report
+
+
+    @{
+        ViewBag.Title = "Create";
+    }
+
+    <div class="container">
+        @using (@Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h2>Order Reports</h2>
+                <hr />
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.ID)
+                <div class="row">
+                    <div class="panel panel-default col-sm-6">
+                        <div class="panel-heading">Request</div>
+                        <div class="panel-body">
+                            @Html.DropDownListFor(model => model.RequestID,
+                                                                new SelectList(@ViewBag.Requests, "ID"),
+                                                                   "Select Request",
+                                                                   new
+                                                                   {
+                                                                       @class = "form-control",
+                                                                       onchange = "onClientIndexChange($(this).find('option:selected').val());"
+                                                                   })
+                            @Html.ValidationMessageFor(model => model.RequestID)
+                        </div>
+                        <div id="clientDetails" class="panel-footer">Select a Request!</div>
+                    </div>
+                    @Html.EditorFor(model => model.ReportDate, new { htmlAttributes = new { @class = "form-control", @*@type = "text", disabled = "disabled"*@@style = "display:none"
+                }
+            })
+                    @Html.ValidationMessageFor(model => model.ReportDate)
+                </div>
+                <div>
+                    @Html.EditorFor(model => model.ReportItems, "ReportItems")
+                    @Html.ValidationMessageFor(model => model.ReportItems, "ReportItems")
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Status, new { @class = "form-control", disabled = "disabled" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Status, new { @class = "form-control", disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.Status)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.ActionLink("Back", "Index", new { id = Model.ID }, new { @class = "btn btn-info" }) |
+                    <input type="submit" value="submit" class="btn btn-success" />
+
+                </div>
+            </div>
+        }
+    </div>
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script type="text/javascript">
+
+        function onClientIndexChange(selectedClientId) {
+            $.ajax({
+                url: '@Url.Action("GetClientPartial")',
+                type: 'GET',
+                data: { SupplierID: selectedClientId },
+                success: function (response) {
+                    $('#clientDetails').html(response);
+                }
+            });
+        }
+
+        function onProductSelectIndexChange(productSelector) {
+            var selectedProductId = productSelector.find('option:selected').val();
+
+            var rowElement = productSelector.closest('tr');
+            var rowIndex = rowElement.index();
+            $.ajax({
+                url: '@Url.Action("SelectProduct")',
+                type: 'POST',
+                data: { index: rowIndex, PartID: selectedProductId },
+                success: function (response) {
+                    rowElement.replaceWith(response);
+                },
+                complete: function () {
+
+                    calculateTotal(rowIndex);
+                }
+            });
+        }
+
+        function onAddItemClick() {
+            $.ajax({
+                url: '@Url.Action("AddNewReportItemRow")',
+                type: 'GET',
+                success: function (response) {
+                    $('#reportItemEditorRows').append(response);
+                }
+            });
+        }
+
+        </script>
+    }
+    </div>

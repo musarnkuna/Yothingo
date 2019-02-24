@@ -1,0 +1,60 @@
+@model IEnumerable<YothingoSprint1.Models.Design>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Designs</h2>
+
+<p>
+    <input type="button" value="Upload Design" onclick="location.href='@Url.Action("Create", "Design")'" class="btn btn-primary" />
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Request.Request_Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Request.Request_Number)
+            </td>
+            <td>
+                <img src="@Url.Action("RenderImage", "Design", new { id = item.DesignId})" width="150" height="160" />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.DesignId }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.DesignId }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.DesignId }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/5bd9e0c265224c2640518a8d/default';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->

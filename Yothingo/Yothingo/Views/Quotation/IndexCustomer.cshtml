@@ -1,0 +1,59 @@
+@model IEnumerable<YothingoSprint1.Models.Quotation>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<p class="alert-success">
+    @TempData["Success"]
+</p>
+<h2>Client Invoice</h2>
+
+<p>Check for quotation in 2 to 3 days</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.QuotationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Request.Request_Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuotationDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuotationID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Request.Request_Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuotationDate)
+            </td>
+            <td>
+                @Html.ActionLink("Pay", "Details", new { id = item.QuotationID }, new { @class = "btn btn-info" })
+            </td>
+        </tr>
+    }
+
+</table>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5bd9e0c265224c2640518a8d/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->

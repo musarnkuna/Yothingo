@@ -1,0 +1,51 @@
+@model IEnumerable<YothingoSprint1.Models.RequestMeeting>
+
+@{
+    ViewBag.Title = "My Meetings";
+}
+
+<h2>My Meetings</h2>
+<hr />
+<p>
+    <input type="button" value="Make Request" onclick="location.href='@Url.Action("Create", "RequestMeetings")'" class="btn btn-primary" />
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Agenda)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Agenda)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telephone)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MeetingRequestId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MeetingRequestId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MeetingRequestId })
+        </td>
+    </tr>
+}
+
+</table>

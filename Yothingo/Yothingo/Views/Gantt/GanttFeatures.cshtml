@@ -1,0 +1,68 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Projects Chart</h2>
+
+<div id = "ControlRegion">
+    @(Html.EJ().Gantt("ganttsample2")
+              .TaskIdMapping("Id")
+              .TaskNameMapping("Name")
+              .TreeColumnIndex(1)
+              .StartDateMapping("StartDate")
+              .DurationMapping("Duration")
+              .ProgressMapping("PercentDone")
+              .ScheduleStartDate("01/01/2018")
+              .ScheduleEndDate("12/30/2018")
+               .DateFormat("MM/dd/yyyy")
+              .HighlightWeekends(true)
+              .IncludeWeekend(true)
+              .AllowColumnResize(true)
+               .EnableAltRow(false)
+              .ChildMapping("Children")
+              .AllowSelection(true)
+              .BaselineStartDateMapping("BaselineStartDate")
+              .BaselineEndDateMapping("BaselineEndDate")
+              .RenderBaseline(true)
+              .AllowSorting(true)
+               .ShowProgressStatus(true)
+                .EnableContextMenu(true)
+               .EnableTaskbarTooltip(true)
+              .AllowGanttChartEditing(true)
+               .ToolbarSettings (toolbar => 
+                              {
+                                  toolbar.ShowToolbar();
+                                  toolbar.ToolbarItems(new List<GanttToolBarItems>()
+                                  {
+                                      GanttToolBarItems.Add,
+                                      GanttToolBarItems.Edit,
+                                      GanttToolBarItems.Delete,
+                                      GanttToolBarItems.Update,
+                                      GanttToolBarItems.Cancel,
+                                      GanttToolBarItems.Indent,
+                                      GanttToolBarItems.Outdent,
+                                      GanttToolBarItems.ExpandAll,
+                                      GanttToolBarItems.CollapseAll,
+                                      GanttToolBarItems.Search,
+                                  });
+                              })
+                              .EditSettings(edit =>
+                              {
+                                  edit.AllowEditing(true);
+                                  edit.AllowAdding(true);
+                                  edit.AllowDeleting(true);
+								  edit.AllowIndent(true);
+                                  edit.EditMode("cellEditing");
+                              })
+               .Locale("en-US")
+               .EnableVirtualization(true)
+               .ShowGridCellTooltip(true)
+              .PredecessorMapping("Predecessor")
+              .ResourceInfoMapping("Resources")
+              .ResourceNameMapping("ResourceName")
+              .ResourceIdMapping("ResourceId")
+              .Resources(ViewBag.resources)  
+              .Datasource(ViewBag.datasource)
+              )
+     <script src="@Url.Content("~/Scripts/ej/i18n/ej.culture.en-US.min.js")"></script>
+     <script src="@Url.Content("~/Scripts/ej/l10n/ej.localetexts.en-US.min.js")"></script>
+</div>

@@ -1,0 +1,82 @@
+@model YothingoSprint1.Models.Reports.Minutes
+
+@{
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+}
+<h2>Meeting Minutes</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.Id, "User Name", htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-10">
+            <h5>User name</h5>
+            @Html.DropDownList("Id", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.EventID, "Subject", htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-10">
+            <h5>Subject</h5>
+            @Html.DropDownList("EventID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.EventID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.Attendees, htmlAttributes: new { @class = "form-control" })
+            <b>&#9432; </b>
+            Drag and Type Description
+        </div>
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Attendees, 5, 100, new { htmlAttributes = new { @class = "form-control", style = "width: 100%; max-width: 100%;", @type = "text", @placeholder = "Request Description" } })
+            <p>
+                @Html.ValidationMessageFor(model => model.Attendees, "", new { @class = "text-danger" })
+            </p>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.Details, htmlAttributes: new { @class = "form-control" })
+            <b>&#9432; </b>
+            Drag and Type Description
+        </div>
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Details, 5, 100, new { htmlAttributes = new { @class = "form-control", style = "width: 100%; max-width: 100%;", @type = "text", @placeholder = "Request Description" } })
+            <p>
+                @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
+            </p>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <h5>Date of Minutes</h5>
+            @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-lg-10">
+            <input type="button" value="Back" onclick="location.href='@Url.Action("Index", "Minutes")'" class="btn btn-info" />|
+            <input type="submit" value="Submit Minutes" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

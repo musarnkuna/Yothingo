@@ -1,0 +1,40 @@
+@model YothingoSprint1.Models.Quotation
+@{
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Email</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <h4>Student</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayName("Supplier :")
+            </dt>
+            <dd>
+                @Html.TextBox("name", "Modelitem => Modelitem.Supplier.ID", new { @class = "form-control", @disabled = "disabled" })
+            </dd>
+            <br />
+            <dt>
+                @Html.DisplayName("Email To:")
+            </dt>
+
+            <dd>
+                @Html.TextBox("email", "", new { @class = "form-control" })
+                <br />
+                <input type="submit" value="Send Email>>" class="btn btn-primary" />
+            </dd>
+
+
+        </dl>
+    </div>
+    <p>
+
+
+    </p>
+}

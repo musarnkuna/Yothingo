@@ -1,0 +1,64 @@
+@model YothingoSprint1.Models.RequestMeeting
+
+@{
+    ViewBag.Title = "Create";
+}
+<b>
+    <h2>Request Meeting</h2>
+</b>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>Agenda</h5>
+                @Html.EditorFor(model => model.Agenda, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Agenda" } })
+                @Html.ValidationMessageFor(model => model.Agenda, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>Description</h5>
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Description" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", @*@type = "text", disabled = "disabled"*@@style = "display:none"
+            }
+        })
+                @Html.HiddenFor(m => m.Date)
+
+                @Html.ValidationMessageFor(model => model.Date)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>Telephone</h5>
+                @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Telephone" } })
+                @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-10">
+                <input type="button" value="Back" onclick="location.href='@Url.Action("Index", "RequestMeetings")'" class="btn btn-info" />|
+                <input type="submit" value="Make Request" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

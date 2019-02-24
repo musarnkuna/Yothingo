@@ -1,0 +1,153 @@
+@model YothingoSprint1.Models.Invoice
+
+    @{
+        Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <div class="container">
+        @using (@Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h2>Change Details</h2>
+            <hr />
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.ID)
+
+            <div class="row">
+                <div class="panel panel-default col-sm-6">
+                    <div class="panel-heading">Supplier</div>
+                    <div class="panel-body">
+                        @Html.DropDownListFor(model => model.SupplierID,
+                                                            new SelectList(@ViewBag.Suppliers, "ID", "Name"),
+                                                               "Select Supplier",
+                                                               new
+                                                               {
+                                                                   @class = "form-control",
+                                                                   onchange = "onClientIndexChange($(this).find('option:selected').val());"
+                                                               })
+                        @Html.ValidationMessageFor(model => model.SupplierID)
+                    </div>
+                    <div id="clientDetails" class="panel-footer">Select a Request!</div>
+                </div>
+                @Html.EditorFor(model => model.InvoiceDate, new { htmlAttributes = new { @class = "form-control", @*@type = "text", disabled = "disabled"*@@style = "display:none"
+            }
+        })
+                @Html.ValidationMessageFor(model => model.InvoiceDate)
+            </div>
+            <div class="row">
+                <div class="panel panel-default col-sm-6">
+                    <div class="panel-heading">Status</div>
+                    <div class="panel-body">
+                        @Html.DropDownListFor(model => model.StatusID,
+                                                  new SelectList(@ViewBag.Statuses, "ID", "Name"),
+                                                     "Select Status",
+                                                     new
+                                                     {
+                                                         @class = "form-control",
+                                                         onchange = "onClientIndexChange($(this).find('option:selected').val());"
+                                                     })
+                        @Html.ValidationMessageFor(model => model.StatusID)
+                    </div>
+                    <div id="clientDetails" class="panel-footer">Select Status!</div>
+                </div>
+            </div>
+            <div>
+                @Html.EditorFor(model => model.InvoiceItems, "InvoiceItems")
+                @Html.ValidationMessageFor(model => model.InvoiceItems, "InvoiceItems")
+            </div>
+            <div class="form-group">
+                @Html.ActionLink("Back", "Index", new { id = Model.ID }, new { @class = "btn btn-info" }) |
+                <input type="submit" value="submit" class="btn btn-success" />
+
+            </div>
+        </div>
+        }
+    </div>
+
+
+    @section Scripts {
+
+        <script type="text/javascript">
+
+        function onClientIndexChange(selectedClientId) {
+            $.ajax({
+                url: '@Url.Action("GetClientPartial")',
+                type: 'GET',
+                data: { SupplierID: selectedClientId },
+                success: function (response) {
+                    $('#clientDetails').html(response);
+                }
+            });
+        }
+
+        function onProductSelectIndexChange(productSelector) {
+            var selectedProductId = productSelector.find('option:selected').val();
+
+            var rowElement = productSelector.closest('tr');
+            var rowIndex = rowElement.index();
+            $.ajax({
+                url: '@Url.Action("SelectProduct")',
+                type: 'POST',
+                data: { index: rowIndex, PartID: selectedProductId },
+                success: function (response) {
+                    rowElement.replaceWith(response);
+                },
+                complete: function () {
+
+                    calculateTotal(rowIndex);
+                }
+            });
+        }
+
+        function onAddItemClick() {
+            $.ajax({
+                url: '@Url.Action("AddNewInvoiceItemRow")',
+                type: 'GET',
+                success: function (response) {
+                    $('#invoiceItemEditorRows').append(response);
+                }
+            });
+        }
+
+        function calculateTotal(rowIndex) {
+            var rowElement = $("#itemEditorTable tbody tr").eq(rowIndex);
+            //var priceElement = rowElement.find(".unitprice");
+            var quantityElement = rowElement.find(".quantity");
+            var totalElement = rowElement.find(".total");
+            var quantity = parseFloat(quantityElement.val()) || 0;
+            var price = parseFloat(priceElement.val()) || 0;
+            totalElement.val(quantity * price);
+
+            updateTotals();
+        }
+
+        function updateTotals() {
+
+            var subTotal = 0;
+
+            $('.total').each(function () {
+                subTotal += parseFloat(this.value);
+            });
+
+            var salesTaxPercent = $('#SalesTaxPercent').val();
+            var totalSalesTax = subTotal * salesTaxPercent / 100;
+            var grandTotal = subTotal + totalSalesTax;
+
+            $('#SubTotal').val(subTotal);
+            $('#TotalSalesTax').val(totalSalesTax);
+            $('#GrandTotal').val(grandTotal);
+
+            calculatePayments();
+
+        }
+
+        function calculatePayments() {
+           var grandTotal = $('#GrandTotal').val();
+        }
+
+
+        </script>
+    }

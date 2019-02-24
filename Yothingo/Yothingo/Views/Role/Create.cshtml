@@ -1,0 +1,14 @@
+@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+
+    @{
+        Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+    }
+    <h2>Add New User Role:</h2>
+
+    @using (Html.BeginForm())
+    {
+        <p> Enter User Role Name:</p>
+
+        @Html.EditorFor(m => m.Name)
+        <input type="submit" value="Create Role" />
+    }

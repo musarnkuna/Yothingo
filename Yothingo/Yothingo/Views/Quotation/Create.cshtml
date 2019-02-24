@@ -1,0 +1,163 @@
+@model YothingoSprint1.Models.Quotation
+
+
+
+    @{
+        Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+    }
+    <div class="container">
+        @using (@Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h2>Clients Invoice</h2>
+            <hr />
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.QuotationID)
+            <div class="row">
+                <div class="panel panel-default col-sm-6">
+                    <div class="panel-heading">Request</div>
+                    <div class="panel-body">
+                        @Html.DropDownListFor(model => model.RequestID,
+                                                            new SelectList(@ViewBag.Requests, "ID", "Request_Number"),
+                                                               "Select Request",
+                                                               new
+                                                               {
+                                                                   @class = "form-control",
+                                                                   onchange = "onClientIndexChange($(this).find('option:selected').val());"
+                                                               })
+                        @Html.ValidationMessageFor(model => model.RequestID)
+                    </div>
+                    <div id="clientDetails" class="panel-footer">Select a Request!</div>
+                </div>
+                @Html.EditorFor(model => model.QuotationDate, new { htmlAttributes = new { @class = "form-control", @*@type = "text", disabled = "disabled"*@@style = "display:none"
+            }
+        })
+                @Html.ValidationMessageFor(model => model.QuotationDate)
+            </div>
+
+            <div class="row">
+                <div class="panel panel-default col-sm-6">
+                    <div class="panel-heading">Status</div>
+                    <div class="panel-body">
+                        @Html.DropDownListFor(model => model.StatusID,
+                                                  new SelectList(@ViewBag.Statuses, "ID", "Name"),
+                                                     "Select Status",
+                                                     new
+                                                     {
+                                                         @class = "form-control",
+                                                         onchange = "onClientIndexChange($(this).find('option:selected').val());"
+                                                     })
+                        @Html.ValidationMessageFor(model => model.StatusID)
+                    </div>
+                    <div id="clientDetails" class="panel-footer">Select Status!</div>
+                </div>
+            </div>
+
+            <div>
+                @Html.EditorFor(model => model.QuotationItems, "QuotationItems")
+                @Html.ValidationMessageFor(model => model.QuotationItems, "QuotationItems")
+            </div>
+            <div class="form-group">
+                @Html.ActionLink("Back", "Index", new { id = Model.QuotationID }, new { @class = "btn btn-info" }) |
+                <input type="submit" value="submit" class="btn btn-success" />
+            </div>
+        </div>
+        }
+    </div>
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script type="text/javascript">
+
+        function onClientIndexChange(selectedClientId) {
+            $.ajax({
+                url: '@Url.Action("GetClientPartial")',
+                type: 'GET',
+                data: { RequestID: selectedClientId },
+                success: function (response) {
+                    $('#clientDetails').html(response);
+                }
+            });
+        }
+         function onClientIndexChange(selectedClientId) {
+            $.ajax({
+                url: '@Url.Action("GetStatusPartial")',
+                type: 'GET',
+                data: { StatusID: selectedClientId },
+                success: function (response) {
+                    $('#clientDetails').html(response);
+                }
+            });
+        }
+
+        function onProductSelectIndexChange(productSelector) {
+            var selectedProductId = productSelector.find('option:selected').val();
+
+            var rowElement = productSelector.closest('tr');
+            var rowIndex = rowElement.index();
+            $.ajax({
+                url: '@Url.Action("SelectProduct")',
+                type: 'POST',
+                data: { index: rowIndex, PartID: selectedProductId },
+                success: function (response) {
+                    rowElement.replaceWith(response);
+                },
+                complete: function () {
+
+                    calculateTotal(rowIndex);
+                }
+            });
+        }
+
+        function onAddItemClick() {
+            $.ajax({
+                url: '@Url.Action("AddNewQuotationItemRow")',
+                type: 'GET',
+                success: function (response) {
+                    $('#quotationItemEditorRows').append(response);
+                }
+            });
+        }
+
+        function calculateTotal(rowIndex) {
+            var rowElement = $("#itemEditorTable tbody tr").eq(rowIndex);
+            var priceElement = rowElement.find(".unitprice");
+            var quantityElement = rowElement.find(".quantity");
+            var totalElement = rowElement.find(".total");
+            var quantity = parseFloat(quantityElement.val()) || 0;
+            var price = parseFloat(priceElement.val()) || 0;
+            totalElement.val(quantity * price);
+
+            updateTotals();
+        }
+
+        function updateTotals() {
+
+            var subTotal = 0;
+
+            $('.total').each(function () {
+                subTotal += parseFloat(this.value);
+            });
+
+            var salesTaxPercent = $('#SalesTaxPercent').val();
+            var totalSalesTax = subTotal * salesTaxPercent / 100;
+            var grandTotal = subTotal + totalSalesTax;
+
+            $('#SubTotal').val(subTotal);
+            $('#TotalSalesTax').val(totalSalesTax);
+            $('#GrandTotal').val(grandTotal);
+
+            calculatePayments();
+
+        }
+
+        function calculatePayments() {
+           var grandTotal = $('#GrandTotal').val();
+        }
+
+
+        </script>
+    }

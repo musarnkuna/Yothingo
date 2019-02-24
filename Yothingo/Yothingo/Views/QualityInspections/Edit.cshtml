@@ -1,0 +1,83 @@
+@model YothingoSprint1.Models.Reports.QualityInspection
+
+@{
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+}
+
+<h2>Edit Inspection</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.QualityInspectionId)
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.RequestID, "Request Number", htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-10">
+            <h5>Request Number</h5>
+            @Html.DropDownList("RequestID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.RequestID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.ReportDescription, htmlAttributes: new { @class = "form-control" })
+            <b>&#9432; </b>
+            Drag and Type Description
+        </div>
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.ReportDescription, 5, 100, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ReportDescription, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.Summary, htmlAttributes: new { @class = "form-control" })
+            <b>&#9432; </b>
+            Drag and Type Description
+        </div>
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Summary, 5, 100, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Summary, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StatusId, "StatusId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("StatusId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.StatusId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CreateDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CreateDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CreateDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="button" value="Back" onclick="location.href='@Url.Action("Index", "QualityInspections")'" class="btn btn-primary" />|
+            <input type="submit" value="Change Inspection" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

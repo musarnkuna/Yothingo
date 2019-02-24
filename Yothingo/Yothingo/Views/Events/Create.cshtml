@@ -1,0 +1,85 @@
+@model YothingoSprint1.Models.Event
+
+@{
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+}
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Meeting Schedule</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="col-md-10">
+            <h5>Subject</h5>
+            @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Subject" } })
+            @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "form-control" })
+            <b>&#9432; </b>
+            Drag and Type Description
+        </div>
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Description, 5, 100, new { htmlAttributes = new { @class = "form-control", style = "width: 100%; max-width: 100%;", @type = "text", @placeholder = "Request Description" } })
+            <p>
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </p>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <h5>Date of Meeting</h5>
+            @Html.EditorFor(model => model.Start, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ThemeColor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ThemeColor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ThemeColor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsFullDay, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsFullDay)
+                    @Html.ValidationMessageFor(model => model.IsFullDay, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        <div class="col-lg-10">
+            <input type="button" value="Back" onclick="location.href='@Url.Action("Index", "Events")'" class="btn btn-info" />|
+            <input type="submit" value="Schedule Meeting" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,52 @@
+@model YothingoSprint1.Models.InvoiceItem
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>InvoiceItem</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Invoice.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Invoice.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Part.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Part.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-success" })|
+    @*@Html.ActionLink("<<Back", "Index", new { id = Model.ID }, new { @class = "btn btn-info" })*@
+</p>

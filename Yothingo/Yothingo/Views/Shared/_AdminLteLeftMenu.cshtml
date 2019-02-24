@@ -1,0 +1,76 @@
+﻿
+@{
+    Layout = null;
+}
+<aside class="main-sidebar">
+    <section class="sidebar">
+        @*<form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search..." />
+                <span class="input-group-btn">
+                    <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </form>*@
+        <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
+            <br />
+            <br />
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-laptop"></i>
+                    <span>Clients</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="dropdown-header">Quotations and Designs</li>
+                    <li>@Html.ActionLink("Client Requests", "IndexAdmin", "Requests")</li>
+                    <li>@Html.ActionLink("Designs", "Index", "Design")</li>
+                    <li>@Html.ActionLink("Generate Quotation", "Index", "Quotation")</li>
+                    <li class="dropdown-header">Meeting Scheduling</li>
+                    <li>@Html.ActionLink("Schedule Meeting", "Index", "Events")</li>
+                    <li>@Html.ActionLink("Calendar", "Index", "Event")</li>
+                    <li>@Html.ActionLink("Meeting Minutes", "Index", "Minutes")</li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>Parts</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>@Html.ActionLink("Order Parts", "Create", "Invoice")</li>
+                    <li>@Html.ActionLink("Parts", "Index", "Part")</li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-table"></i> <span>Project Management</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    class="dropdown-menu">
+                    <li>@Html.ActionLink("Project Chart", "Ganttfeatures", "Gantt")</li>
+                    <li class="dropdown-header">Reports</li>
+                    <li>@Html.ActionLink("Daily Reports", "Index", "DailyReports")</li>
+                    <li>@Html.ActionLink("Quality Inspections", "Index", "QualityInspections")</li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-table"></i> <span>Users</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="dropdown-header">Suppliers</li>
+                    <li>@Html.ActionLink("View Suppliers", "Index", "Supplier")</li>
+                    <li>@Html.ActionLink("Add Suppliers", "Create", "Supplier")</li>
+
+                    <li class="dropdown-header">User</li>
+                    <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                    <li>@Html.ActionLink("Role", "Index", "Role")</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+</aside>

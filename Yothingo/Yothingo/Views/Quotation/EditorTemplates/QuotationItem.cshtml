@@ -1,0 +1,25 @@
+@using HtmlHelpers.BeginCollectionItem
+
+@model YothingoSprint1.Models.QuotationItem
+
+<tr class="">
+    @using (Html.BeginCollectionItem("QuotationItems"))
+    {
+        <td class="hidden">@Html.HiddenFor(model => model.ID)</td>
+        <td class="">
+            @Html.DropDownListFor(model => model.PartID,  
+                                         new SelectList(@ViewBag.Parts, "PartID", "Name"),   
+                                            "Select Part",
+                                            new
+                                            {
+                                                @class = "form-control",
+                                                onchange = "onProductSelectIndexChange($(this));"
+                                            })
+        </td>
+        <td>@Html.TextBoxFor(model => model.Part.Description, new { @class = "form-control", disabled = "disabled" })</td>
+        <td class="text-center">@Html.TextBoxFor(model => model.Part.UnitPrice, new { @onchange = "calculateTotal($(this).closest('tr').index());", @class = "unitprice form-control", disabled = "disabled" })</td>
+        <td class="text-center">@Html.TextBoxFor(model => model.Quantity, new { @onchange = "calculateTotal($(this).closest('tr').index());", @class = "quantity form-control" })</td>
+        <td class="text-center">@Html.TextBoxFor(model => model.Total, new { @class = "total form-control", disabled = "disabled" })</td>
+        <td class="text-center"><button class="btn btn-link" onclick="$(this).closest('tr').remove(); updateTotals();"><span class="glyphicon glyphicon-trash"></span></button></td>
+    }
+</tr>

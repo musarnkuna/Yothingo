@@ -1,0 +1,55 @@
+@model YothingoSprint1.Models.Reports.DailyReport
+
+@{
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Daily Report</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Request.Request_Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Request.Request_Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReportDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReportDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Summary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Summary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

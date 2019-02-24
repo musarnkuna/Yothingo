@@ -1,0 +1,86 @@
+@model YothingoSprint1.Models.Quotation
+
+
+@{
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<div class="container">
+    <div class="container">
+        <div class="col-md-5">
+            <div class="form-area">
+                <form role="form">
+                    <br style="clear:both">
+                    <h3 style="margin-bottom: 25px; text-align: center;">Order No: @Html.DisplayFor(model => model.QuotationID)</h3>
+
+                    <div align="center">
+                        <h3>
+                            Invoice Number:
+                            @Html.DisplayFor(model => model.Request.Request_Number)
+                        </h3>
+                    </div>
+
+                    <h2>
+                        <img width="110" height="80" src="~/Images/icon.png" alt="" />
+                        YOTHINGO REFRIGERATION & COLDROOM INSTALLATION
+                    </h2>
+                    <div align="center">
+                        <h4>SPECIALIST OF:</h4>
+                        <h4>*Cold Room *Freezers * Clean Rooms *Blast Freezers * Mobile Cold Rooms & Repairs</h4>
+                    </div>
+
+                    <div align="right">
+                        <h3>
+                            DATE: @Html.DisplayFor(model => model.QuotationDate)
+                        </h3>
+                    </div>
+
+                    <div align="left">
+                        @*<h3>
+                            CLIENT NAME: @Html.DisplayFor(model => model.)
+
+                        </h3>
+                        <h3>
+                            ADDRESS:
+                        </h3>*@
+                    </div>
+
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+   
+
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ActionLink("Back", "Index", new { id = Model.QuotationID }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Pay", "Payment", new { id = Model.QuotationID }, new { @class = "btn btn-success" })
+            @Html.Partial("../QuotationItem/Index", Model.QuotationItems)
+
+        </div>
+        <div class="form-group">
+            
+        </div>
+    </div>
+</div>
+
+@*//@Html.ActionLink("Back", "Index", new { id = Model.PartID }, new { @class = "btn btn-info" })|*@

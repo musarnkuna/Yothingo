@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Yothingo</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Images/icon.png" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:200" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" @*href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"*@>
+
+    @Styles.Render("~/Content/ej/web/bootstrap-theme/ej.web.all.min.css")
+    @Scripts.Render("~/Scripts/jquery-3.3.1.min.js")
+    @Scripts.Render("~/Scripts/jsrender.min.js")
+    @Scripts.Render("~/Scripts/ej/ej.web.all.min.js")
+    @Scripts.Render("~/Scripts/ej/ej.unobtrusive.min.js")
+
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <p class="site-title">
+                    <a href="@Url.Action("Index", "Home")" style="display:block; padding:4px ">
+                        <img width="110" height="80" src="~/Images/yothingolog.jpg" alt="" />
+                    </a>
+                </p>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("DashBoard", "Index", "DashBoard")</li>
+                    }
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Portfolio", "Portfolio", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Request <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+
+
+                            @*<li>@Html.ActionLink("Sample Quotation", "SampleQuotation", "Requests")</li>*@
+                            <li>@Html.ActionLink("Request Quotation", "Create", "Requests")</li>
+                            <li>@Html.ActionLink("My Requests", "Index", "Requests")</li>
+                            @*<li>@Html.ActionLink("Request Meeting", "Create", "RequestMeetings")</li>*@
+                        </ul>
+                    </li>
+                    @*<li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Payments <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="divider"></li>
+                                <li>@Html.ActionLink("Make Payment", "PayPal", "Home")</li>
+                            </ul>
+                        </li>*@
+
+                    @*@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Customers <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="divider"></li>
+
+                                    <li class="dropdown-header">Parts</li>
+
+                                    <li>@Html.ActionLink("Order Parts", "Create", "Invoice")</li>
+                                    <li>@Html.ActionLink("Parts", "Index", "Part")</li>
+                                    <li>@Html.ActionLink("Orders", "Index", "InvoiceItem")</li>
+
+                                </ul>
+                            </li>
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Users<b class="caret"></b></a>
+                                <ul class="dropdown-content">
+                                    <li>@Html.ActionLink("Project Chart", "Index", "Gantt")</li>
+                                    <li class="dropdown-header">Reports</li>
+                                    <li>@Html.ActionLink("Daily Reports", "Index", "DailyReports")</li>
+                                    <li>@Html.ActionLink("Quality Inspections", "Index", "QualityInspections")</li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Users<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="divider"></li>
+                                    <li>@Html.ActionLink("Supplier", "Index", "Supplier")</li>
+                                    <li class="dropdown-header">User</li>
+                                    <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                                    <li>@Html.ActionLink("Role", "Index", "Role")</li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Store Manager<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">User</li>
+                                </ul>
+                            </li>
+
+                            <li>@Html.ActionLink("Requests", "IndexAdmin", "Requests")</li>
+
+
+                        }*@
+                    <li></li>
+                    <li>
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+            <div class="dropdown">
+
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" style="display:block; padding:29px ">
+        <div class="jumbotron" style="border-color:aqua">
+
+            @RenderBody()
+            <footer>
+                <div class="container body-content">
+                    <hr />
+                    <p>&copy; @DateTime.Now.Year - Yothingo</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+    <script src="~/Scripts/main.js" type="text/javascript" charset="utf-8"></script>
+
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    @*<script src="~/Scripts/bootstrap.min.js"></script>*@
+
+    @Html.EJ().ScriptManager()
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,18 @@
+@model YothingoSprint1.Models.Status
+
+
+
+    @if (Model == null)
+    {
+        <div class="panel panel-danger">
+            <div class="panel-body">No Supplier Selected!</div>
+        </div>
+    }
+    else
+    {
+        <div class="panel panel-success">
+            <div class="panel-body"> Compant Name: @Model.Name</div>
+            <div class="panel-body"> Email: @Model.StatusDescription</div>
+        </div>
+    }
+    </div>

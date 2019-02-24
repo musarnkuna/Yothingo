@@ -1,0 +1,16 @@
+@model YothingoSprint1.Models.Request
+
+    @if (Model == null)
+    {
+        <div class="panel panel-danger">
+            <div class="panel-body">No Supplier Selected!</div>
+        </div>
+    }
+    else
+    {
+        <div class="panel panel-success">
+            <div class="panel-body"> Request Number: @Model.RequestNo</div>
+            <div class="panel-body"> Request Date: @Model.RequestDate</div>
+        </div>
+    }
+    </div>

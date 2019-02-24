@@ -1,0 +1,55 @@
+@model YothingoSprint1.Models.Quotation
+
+@{
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Quotation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.QuotationDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.QuotationDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesTaxPercent)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SalesTaxPercent)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalSalesTax)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalSalesTax)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GrandTotal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GrandTotal)
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Back", "Index", new { id = Model.QuotationID }, new { @class = "btn btn-info" })
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            @Html.Partial("../QuotationItem/Index", Model.QuotationItems)
+        </div>
+    </div>
+
+</div>

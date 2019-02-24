@@ -1,0 +1,56 @@
+@model YothingoSprint1.Models.Design
+<div class="jumbotron" style="border-color:aqua">
+
+    @{
+        ViewBag.Title = "Upload Design";
+        Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+    }
+
+    <h2>Upload Design</h2>
+
+    @using (Html.BeginForm("Create", "Design", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h5>Design name</h5>
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Design name" } })
+
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h5>Request Number</h5>
+                    @Html.DropDownList("ID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="file" multiple="multiple" name="file" value="Upload  File" />
+                    @*@Html.TextBoxFor(x => x.File, new { type = "file", multiple = "true" })*@
+                    @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10">
+                    <input type="button" value="Back" onclick="location.href='@Url.Action("Index", "Design")'" class="btn btn-info" />|
+                    <input type="submit" value="Upload Design" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+    @Scripts.Render("~/Scripts/jquery-3.3.1.min.js")
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</div>

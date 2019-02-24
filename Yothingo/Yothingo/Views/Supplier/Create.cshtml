@@ -1,0 +1,88 @@
+@model YothingoSprint1.Models.Supplier
+
+    @{
+        Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+    }
+    <br>
+
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h2>New Supplier</h2>
+            <hr />
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h5>First Name</h5>
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "First Name" } })
+                    @Html.ValidationMessageFor(model => model.FirstName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h5>Last Name</h5>
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Last Name" } })
+                    @Html.ValidationMessageFor(model => model.LastName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h5>Email </h5>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Email" } })
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h5>Company Name</h5>
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Company Name" } })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h5>Phone Number</h5>
+                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Phone Number" } })
+                    @Html.ValidationMessageFor(model => model.Phone)
+                </div>
+            </div>
+
+            <h5>Address:</h5>
+            <b>&#9432; </b>
+            Drag and type Address
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h5>Address </h5>
+                    @Html.TextAreaFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Address" } })
+                    @Html.ValidationMessageFor(model => model.Address)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10">
+                    <input type="button" value="Back" onclick="location.href='@Url.Action("Index", "Supplier")'" class="btn btn-info" />|
+                    <input type="submit" value="Add Supplier" class="btn btn-success" />
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                    @Html.ActionLink("Back", "Index", new { id = Model.ID }, new { @class = "btn btn-info" }) |
+                    <input type="submit" value="submit" class="btn btn-success" />
+                </div>*@
+        </div>
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

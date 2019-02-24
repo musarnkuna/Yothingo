@@ -1,0 +1,29 @@
+@model IList<YothingoSprint1.Models.ReportItem>
+
+
+
+    <h2>Order Items</h2>
+    <div class="container">
+        <table id="itemEditorTable" class="table table-bordered">
+            <thead>
+                <tr class="form-inline">
+                    <th class="control-label col-md-3 text-center">Phase</th>
+                    <th class="control-label col-md-4 text-center">Description</th>
+                    <th class="control-label col-md-1 text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody id="invoiceItemEditorRows" class="">
+                @for (int i = 0; i < @Model.Count(); i++)
+                {
+                    @Html.EditorFor(model => model[i])
+                }
+            </tbody>
+        </table>
+
+        <div class="form-group pull-right">
+            <div class="col-md-offset-2 col-md-10">
+                <button onclick="onAddItemClick();" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Item</button>
+            </div>
+        </div>
+    </div>
+    </div>

@@ -1,0 +1,58 @@
+@model YothingoSprint1.Models.Design
+<div class="jumbotron" style="border-color:aqua">
+
+    @{
+        ViewBag.Title = "Delete";
+        Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+    }
+
+    <h2>Delete</h2>
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="button" value="Back" onclick="location.href='@Url.Action("Index", "Design")'" class="btn btn-info" />|
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+        }
+
+        <table class="table">
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Request.Request_Number)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.Request.Request_Number)
+                </td>
+
+                <td>
+                    @*@Html.DisplayFor(model => model.Image)*@
+
+                    <img src="@Url.Action("RenderImage", "Design", new { id = Model.DesignId})" width="150" height="160" />
+                </td>
+
+            </tr>
+
+        </table>
+
+
+    </div>
+    </div>

@@ -1,0 +1,50 @@
+@model IEnumerable<YothingoSprint1.Models.Quotation>
+                      
+
+                          @{
+                              Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+                          }
+                          <p class="alert-success">
+                              @TempData["Success"]
+                          </p>
+                          <h2>Client Invoice</h2>
+
+                          <p>
+                              <input type="button" value="Client Invoice" onclick="location.href='@Url.Action("Create", "Quotation")'" class="btn btn-primary" />
+                          </p>
+                          <table class="table">
+                              <tr>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.QuotationID)
+                                  </th>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Request.Request_Number)
+                                  </th>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.QuotationDate)
+                                  </th>
+                                  <th></th>
+                              </tr>
+
+                              @foreach (var item in Model)
+                              {
+                                  <tr>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.QuotationID)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.Request.Request_Number)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.QuotationDate)
+                                      </td>
+                                      <td>
+                                          @Html.ActionLink("Edit", "Edit", new { id = item.QuotationID }, new { @class = "btn btn-success" }) |
+                                          @Html.ActionLink("Details", "Details", new { id = item.QuotationID }, new { @class = "btn btn-info" }) |
+                                          @Html.ActionLink("Delete", "Delete", new { id = item.QuotationID }, new { @class = "btn btn-danger" }) |
+                                          @Html.ActionLink("Email", "Email", new { id = item.QuotationID }, new { @class = "btn btn-warning" })
+                                      </td>
+                                  </tr>
+                              }
+
+                          </table>

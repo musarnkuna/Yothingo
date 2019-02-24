@@ -1,0 +1,36 @@
+@using HtmlHelpers.BeginCollectionItem
+
+@model YothingoSprint1.Models.InvoiceItem
+
+
+
+    <tr class="">
+        @using (Html.BeginCollectionItem("InvoiceItems"))
+        {
+            <td class="hidden">@Html.HiddenFor(model => model.ID)</td>
+            <td class="">
+                @Html.DropDownListFor(model => model.PartID,
+                                             new SelectList(@ViewBag.Parts, "PartID", "Name"),
+                                                "Select Part",
+                                                new
+                                                {
+                                                    @class = "form-control",
+                                                    onchange = "onProductSelectIndexChange($(this));"
+                                                })
+                @Html.ValidationMessageFor(model => model.PartID)
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Part.Description, new { @class = "form-control", disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.Part.Description)
+            </td>
+            <td class="text-center">
+                @Html.TextBoxFor(model => model.Quantity, new { @onchange = "calculateTotal($(this).closest('tr').index());", @class = "quantity form-control" })
+                @Html.ValidationMessageFor(model => model.Quantity)
+            </td>
+            <td class="text-center"><button class="btn btn-link" onclick="$(this).closest('tr').remove(); updateTotals();"><span class="glyphicon glyphicon-trash"></span></button></td>
+        }
+        @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
+
+    </tr>

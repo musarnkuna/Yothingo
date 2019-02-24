@@ -1,0 +1,80 @@
+@model YothingoSprint1.Models.Request
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<b>
+    <h2>Make Request</h2>
+</b>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>Width </h5>
+                @Html.EditorFor(model => model.Width, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Room Width in metres" } })
+                @Html.ValidationMessageFor(model => model.Width)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>Length </h5>
+                @Html.EditorFor(model => model.Length, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Room Length in metres " } })
+                @Html.ValidationMessageFor(model => model.Length)
+            </div>
+        </div>
+        @*<div class="form-group">
+                <div class="col-md-10">
+                    <h5>Fridge Type </h5>
+                    @Html.DropDownListFor(model =>model.RoomId,
+                    new SelectList(@ViewBag.Rooms, "ID", "Name"),
+                                                             "Select Fridge Type",
+                                                             new
+                                                             {
+                                                                 @class = "form-control",
+                                                                 onchange = "onClientIndexChange($(this).find('option:selected').val());"
+                                                             })
+                    @Html.ValidationMessageFor(model => model.RoomId)
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RequestDate, new { htmlAttributes = new { @class = "form-control", @*@type = "text", disabled = "disabled"*@@style = "display:none"
+            }
+        })
+                @Html.HiddenFor(m => m.RequestDate)
+
+                @Html.ValidationMessageFor(model => model.RequestDate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "form-control" })
+                <b>&#9432; </b>
+                Drag and Type Description
+            </div>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, 5, 100, new { htmlAttributes = new { @class = "form-control", style = "width: 100%; max-width: 100%;", @type = "text", @placeholder = "Request Description" } })
+                <p>
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </p>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10">
+                <input type="button" value="Back" onclick="location.href='@Url.Action("Index", "Requests")'" class="btn btn-info" />|
+                <input type="submit" value="Make Request" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

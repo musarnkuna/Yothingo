@@ -1,0 +1,39 @@
+@model IEnumerable<YothingoSprint1.Models.Request>
+
+    @{
+        Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+    }
+
+    <h2>All Customer Requests</h2>
+
+    @*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.applicationUser.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Request_Number)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.applicationUser.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Request_Number)
+            </td>
+         
+            <td>
+                @Html.ActionLink("Full Details", "Details", new { id = item.ID }, new { @class = "btn btn-info" }) 
+            </td>
+        </tr>
+        }
+
+    </table>

@@ -1,0 +1,49 @@
+@model YothingoSprint1.Models.Supplier
+
+
+
+    <h2>testClientView</h2>
+
+    <div class="panel-body">
+        @Html.DropDownListFor(model => model.ID,
+                                             new SelectList(@ViewBag.Suppliers, "ID", "Name"),    // Selection options
+                                                "Select Supplier",
+                                                new
+                                                {
+                                                    @class = "form-control",
+                                                    onchange = "onClientIndexChange($(this).find('option:selected').val());"
+                                                })
+    </div>
+
+    <div id="clientDetails" class="panel-footer">Select a Supplier!</div>
+
+
+
+    @section Scripts {
+
+        <script type="text/javascript">
+
+    // Upon receiving the SupplierID make an ajax request to find the Supplier and then display the
+    // Supplier details in the clientDetails div
+    function onClientIndexChange(selectedClientId) {
+        //var urlRegisterPartner = 'InvoiceController/GetClientPartial';
+        //alert(urlRegisterPartner);
+        //alert(selectedClientId);
+
+        // Make a ajax call to the controller to find the Supplier with the selected id
+        // And show the Supplier in the Supplier div upon success
+        $.ajax({
+
+            url: '@Url.Action("GetClientPartial", "Invoice")',
+            type: 'GET',
+            data: { SupplierID: selectedClientId },   // Set the selected SupplierID as the argument for the controller
+            success: function (response) {
+                // when the AJAX succeeds refresh the div with
+                // the partial HTML returned by the Invoice controller action
+                $('#clientDetails').html(response);
+            }
+        });
+    }
+        </script>
+    }
+    </div>

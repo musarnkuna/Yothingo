@@ -1,0 +1,66 @@
+@model YothingoSprint1.Models.Request
+
+
+
+    @{
+        Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
+    }
+
+    <h2>Full Details</h2>
+
+    <div>
+        <h4></h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Request_Number)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Request_Number)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Width)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Width)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Width)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Length)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Length)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.RequestDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RequestDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.TextAreaFor(model => model.Description, new { style = " width:97%; height:50px;", tabindex = 5, id = "someId", disabled = "disabled" })
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="button" value="Back" onclick="location.href='@Url.Action("Index", "Requests")'" class="btn btn-info" />
+            </div>
+        </div>
+    </p>

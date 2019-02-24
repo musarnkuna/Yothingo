@@ -1,0 +1,37 @@
+<div class="jumbotron" style="border-color:aqua">
+    @{
+        ViewBag.Title = "Home Page";
+    }
+    <b>
+        <h1 align="center">Pay pal</h1>
+    </b>
+    @using (Html.BeginForm("ValidateCommand", "PayPal"))
+    {
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        Request Number:
+                    </td>
+                    <td>
+                        <input type="text" name="product" value="21545485599" readonly />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Amount:
+                    </td>
+                    <td>
+                        $<input type="text" name="totalPrice" value="14000" readonly />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" name="btnConfirm" value="Check Out with Paypal" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    }
+</div>
